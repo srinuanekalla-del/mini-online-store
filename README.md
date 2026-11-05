@@ -91,6 +91,8 @@ Admin: /api/admin/products (GET, POST, PUT/:id, DELETE/:id) · /api/admin/orders
 
 **With more time:** pagination, image upload, order cancellation that restores stock, coupon usage limits, rate limiting, end-to-end browser tests, deployment with a live demo link.
 
+
 ## AI tools used
 
-(Edit this section to describe your own usage honestly.) I used Claude to help generate the first version of the code and tests, then I reviewed, ran and tested it myself.
+- **Claude (Anthropic):** generated the first version of the backend, frontend and tests from the assignment requirements, and helped me debug setup problems (Node 24 and `better-sqlite3`, Git configuration).
+- **What I did myself:** installed and ran the project, tested every feature by hand (cart, coupons, checkout, stock, admin, reviews), replaced the Power Bank image with a local photo, and reviewed the code so I can explain it, especially the checkout transaction, coupon rules, server-side pricing and the tests.

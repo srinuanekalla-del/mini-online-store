@@ -2,7 +2,28 @@ require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const { openDb } = require('./db');
 
+// Fallback placeholder, used only for a product with no local image below.
 const img = (s) => `https://picsum.photos/seed/${encodeURIComponent(s)}/480/360`;
+
+// Local photos live in public/images and are served by Express at /images/...
+// Filenames are case-sensitive on Mac/Linux, so they must match exactly.
+const LOCAL_IMAGES = {
+  'Wireless Earbuds': '/images/wireless_earbuds.jpg',
+  'Smart Watch': '/images/smart_watch.jpg',
+  'Bluetooth Speaker': '/images/bluetooth_speaker.jpg',
+  'Power Bank 20000mAh': '/images/powerbank.jpg',
+  'Cotton T-Shirt': '/images/cotton_T_shirt.jpg',
+  'Denim Jacket': '/images/denim_jacket.jpg',
+  'Running Shoes': '/images/running_shoes.jpg',
+  'Everyday Backpack': '/images/everyday_backpack.jpg',
+  'Ceramic Mug Set': '/images/ceramic_mug_set.jpg',
+  'LED Desk Lamp': '/images/led_desk_lamp.jpg',
+  'Cotton Bedsheet': '/images/cotton_bedsheet.jpg',
+  'Wall Clock': '/images/wall_clock.jpg',
+  'Atomic Habits': '/images/atomic_habits_book.jpg',
+  'Deep Work': '/images/deepwork_book.jpg',
+};
+
 // [name, category, price in rupees, stock, description]
 const PRODUCTS = [
   ['Wireless Earbuds', 'Electronics', 2499, 25, 'Bluetooth 5.3, 24-hour battery with case.'],
@@ -32,7 +53,7 @@ function seed(db) {
   const prod = db.prepare(
     'INSERT INTO products (name,description,image_url,category,price_cents,stock) VALUES (?,?,?,?,?,?)'
   );
-  for (const [n, c, p, s, d] of PRODUCTS) prod.run(n, d, img(n), c, p * 100, s);
+  for (const [n, c, p, s, d] of PRODUCTS) prod.run(n, d, LOCAL_IMAGES[n] || img(n), c, p * 100, s);
 
   const coupon = db.prepare(
     'INSERT INTO coupons (code,type,value,min_order_cents,expires_at) VALUES (?,?,?,?,?)'

@@ -10,7 +10,8 @@ Requires Node.js 18 or newer.
 
 ```bash
 npm install
-cp .env.example .env      # then set JWT_SECRET to any long random string
+cp .env.example .env      # Windows Command Prompt: copy .env.example .env
+# now open .env and set JWT_SECRET to any long random string
 npm run seed              # creates the database with demo users, products and coupons
 npm start                 # http://localhost:3000
 npm test                  # runs the automated tests (uses an in-memory DB)
@@ -83,7 +84,7 @@ Admin: /api/admin/products (GET, POST, PUT/:id, DELETE/:id) · /api/admin/orders
 **Finished:** every core feature and both stretch items listed above, plus 10 automated tests.
 
 **Not done / limitations:**
-- Images are URLs (seed data uses picsum.photos placeholders); there is no image upload.
+- Product images are URLs or local files in `public/images` (the seed uses local photos); there is no image upload from the admin panel.
 - No pagination on the product list or admin tables.
 - Single address-less checkout; no payment, email or password reset.
 - JWT is kept in `localStorage`; a production app would prefer an httpOnly cookie plus CSRF protection.
@@ -91,8 +92,7 @@ Admin: /api/admin/products (GET, POST, PUT/:id, DELETE/:id) · /api/admin/orders
 
 **With more time:** pagination, image upload, order cancellation that restores stock, coupon usage limits, rate limiting, end-to-end browser tests, deployment with a live demo link.
 
-
 ## AI tools used
 
 - **Claude (Anthropic):** generated the first version of the backend, frontend and tests from the assignment requirements, and helped me debug setup problems (Node 24 and `better-sqlite3`, Git configuration).
-- **What I did myself:** installed and ran the project, tested every feature by hand (cart, coupons, checkout, stock, admin, reviews), replaced the Power Bank image with a local photo, and reviewed the code so I can explain it, especially the checkout transaction, coupon rules, server-side pricing and the tests.
+- **What I did myself:** installed and ran the project, tested every feature by hand (cart, coupons, checkout, stock, admin, reviews), added local product photos, and reviewed the code so I can explain it, especially the checkout transaction, coupon rules, server-side pricing and the tests.
